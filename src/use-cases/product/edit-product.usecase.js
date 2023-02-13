@@ -4,16 +4,14 @@ const editProduct = ({ productDB, productEntity }) => {
 
     const data = await productDB.editProduct({
       id: id,
-      printname: result.printname,
-      barcode: result.barcode,
-      unit: result.unit,
-      qty: result.qty,
-      cost: result.cost
+      name: result.name,
+      description: result.description,
     });
 
+    console.log(data)
     return {
       msg: "Product Updated Successfully",
-      data: data.rows
+      data: data,
     };
   };
 };

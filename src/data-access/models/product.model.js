@@ -1,13 +1,21 @@
-const productModel = ({sequelize, DataTypes }) => {
-  sequelize.define("product", {
-    name: {
-      type: DataTypes.STRING,
+const productModel = ({ sequelize, DataTypes }) => {
+  const sequelizeProduct = sequelize.define(
+    "product",
+    {
+      name: {
+        type: DataTypes.STRING,
+      },
+      description: {
+        type: DataTypes.STRING,
+      },
     },
-    description: {
-      type: DataTypes.STRING,
-    },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-    },
-  });
+    {
+      tableName: "product",
+      freezeTableName: true,
+    }
+  );
+
+  return sequelizeProduct;
 };
+
+module.exports = productModel;

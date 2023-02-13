@@ -14,7 +14,7 @@ const fetchAllProductsController = ({ viewAllProductUseCase }) => {
         source
       };
       const product = await viewAllProductUseCase(response);
-
+      
       return {
         headers: {
           "Content-Type": "application/json"

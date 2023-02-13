@@ -3,17 +3,14 @@ const addProduct = ({ productDB, productEntity }) => {
     const result = productEntity(info);
 
     const data = await productDB.addProduct({
-      printname: result.printname,
-      barcode: result.barcode,
-      unit: result.unit,
-      qty: result.qty,
-      qtybalance: result.qtybalance,
-      cost: result.cost
+      name: result.name,
+      description: result.description,
+   
     });
 
     return {
       msg: "Product Added Successfully",
-      data: data.rows
+      data: data
     };
 
   };
