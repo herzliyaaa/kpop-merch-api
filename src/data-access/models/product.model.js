@@ -8,6 +8,10 @@ const productModel = ({ sequelize, DataTypes }) => {
       description: {
         type: DataTypes.STRING,
       },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      }
     },
     {
       tableName: "product",

@@ -13,6 +13,7 @@ const productData = ({ model }) => {
     try {
       const Product = model.productDataModel;
       const response = await Product.findAll({
+        where: { isActive: true },
         order: [["name", "DESC"]],
       });
       return response;
@@ -49,10 +50,13 @@ const productData = ({ model }) => {
     try {
       const { name, description, id } = product;
       const Product = model.productDataModel;
-      const response = await Product.update({name: name, description: description}, {
-        where: { id: id },
-      });
-      console.log(response)
+      const response = await Product.update(
+        { name: name, description: description },
+        {
+          where: { id: id },
+        }
+      );
+      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -61,12 +65,14 @@ const productData = ({ model }) => {
 
   async function softDeleteProduct(id) {
     try {
-      const { name, description, id } = product;
       const Product = model.productDataModel;
-      const response = await Product.update({name: name, description: description}, {
-        where: { id: id },
-      });
-      console.log(response)
+      const response = await Product.update(
+        { isActive: false },
+        {
+          where: { id: id },
+        }
+      );
+      console.log(response);
       return response;
     } catch (error) {
       console.log(error);

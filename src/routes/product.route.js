@@ -14,5 +14,6 @@ router.post("/product/create", makeExpressCallback(postProductController));
 router.get("/product-details/:id", makeExpressCallback(getProductByIdController));
 router.get("/products", makeExpressCallback(getAllProductController));
 router.patch("/product/update/:id", makeExpressCallback(putProductController))
+router.patch("/product/delete/:id", makeExpressCallback(softDeleteProductController))
 
 module.exports = router;
