@@ -1,5 +1,3 @@
-const { where } = require("sequelize");
-
 const productData = ({ model }) => {
   return Object.freeze({
     getAllProducts,
@@ -14,7 +12,7 @@ const productData = ({ model }) => {
       const Product = model.productDataModel;
       const response = await Product.findAll({
         where: { isActive: true },
-        order: [["name", "DESC"]],
+        order: [["createdAt", "DESC"]],
       });
       return response;
     } catch (error) {

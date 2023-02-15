@@ -10,8 +10,8 @@ const productModel = ({ sequelize, DataTypes }) => {
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
-      }
+        defaultValue: true,
+      },
     },
     {
       tableName: "product",
