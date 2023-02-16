@@ -1,5 +1,5 @@
-const userModel = ({ sequelize, DataTypes }) => {
-  const sequelizeUser = sequelize.define(
+const userModel = ({ sequelize, DataTypes, models }) => {
+  const User = sequelize.define(
     "user",
     {
       name: {
@@ -25,7 +25,11 @@ const userModel = ({ sequelize, DataTypes }) => {
     }
   );
 
-  return sequelizeUser;
+ 
+  
+
+
+  return User;
 };
 
 module.exports = userModel;

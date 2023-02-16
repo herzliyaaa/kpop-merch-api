@@ -4,7 +4,6 @@ const cors = require("cors");
 const logger = require("morgan");
 const path = require("path");
 
-
 const app = express();
 
 if (process.env.NODE_ENV !== "production") {
@@ -24,16 +23,8 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api", require("./routes/product.route"));
-
-
-// const sequelize = require("./config/sequelize.config");
-// sequelize.sequelize.sync()
-//   .then(() => {
-//     console.log("Synced db.");
-//   })
-//   .catch((err) => {
-//     console.log("Failed to sync db: " + err.message);
-//   });
+app.use("/api", require("./routes/user.route"));
+app.use("/api", require("./routes/user-role.route"));
 
 const PORT = process.env.PORT || 3000;
 

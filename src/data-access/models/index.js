@@ -9,8 +9,10 @@ const productDataModel = productModel({ DataTypes, sequelize });
 const userDataModel = userModel({ DataTypes, sequelize });
 const userRoleDataModel = userRoleModel({ DataTypes, sequelize });
 
+userDataModel.belongsTo(userRoleDataModel);
+
 sequelize
-  .sync({ alter: true })
+  .sync({ force: true })
   .then(() => {
     console.log("Table created successfully!");
   })

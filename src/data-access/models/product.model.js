@@ -1,5 +1,5 @@
 const productModel = ({ sequelize, DataTypes }) => {
-  const sequelizeProduct = sequelize.define(
+  const Product = sequelize.define(
     "product",
     {
       name: {
@@ -19,7 +19,7 @@ const productModel = ({ sequelize, DataTypes }) => {
     }
   );
 
-  return sequelizeProduct;
+  return Product;
 };
 
 module.exports = productModel;

@@ -1,7 +1,7 @@
-const fetchAllProductsController = ({ viewAllProductUseCase }) => {
-  return async function getAll(httpRequest) {
+const deleteUserController = ({ softDeleteUserUseCase }) => {
+  return async function get(httpRequest) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
     try {
       const { source = {}, ...info } = httpRequest.body;
@@ -10,15 +10,17 @@ const fetchAllProductsController = ({ viewAllProductUseCase }) => {
       const response = {
         ...info,
         source,
+        id: httpRequest.params.id
       };
-      const product = await viewAllProductUseCase(response);
+
+      const user = await softDeleteUserUseCase(response);
 
       return {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: product,
+        body: user
       };
     } catch (e) {
       console.log(e);
@@ -26,11 +28,11 @@ const fetchAllProductsController = ({ viewAllProductUseCase }) => {
         headers,
         statusCode: 400,
         body: {
-          error: e.message,
-        },
+          error: e.message
+        }
       };
     }
   };
 };
 
-module.exports = fetchAllProductsController;
+module.exports = deleteUserController;

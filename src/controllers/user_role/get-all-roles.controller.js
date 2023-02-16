@@ -1,4 +1,4 @@
-const fetchAllProductsController = ({ viewAllProductUseCase }) => {
+const fetchAllUserRolesController = ({ viewAllUserRoleUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
       "Content-Type": "application/json",
@@ -11,14 +11,14 @@ const fetchAllProductsController = ({ viewAllProductUseCase }) => {
         ...info,
         source,
       };
-      const product = await viewAllProductUseCase(response);
+      const userRole = await viewAllUserRoleUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json",
         },
         statusCode: 200,
-        body: product,
+        body: userRole,
       };
     } catch (e) {
       console.log(e);
@@ -33,4 +33,4 @@ const fetchAllProductsController = ({ viewAllProductUseCase }) => {
   };
 };
 
-module.exports = fetchAllProductsController;
+module.exports = fetchAllUserRolesController;

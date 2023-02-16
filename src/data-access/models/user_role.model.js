@@ -1,8 +1,8 @@
 const userRoleModel = ({ sequelize, DataTypes }) => {
-  const sequelizeUserRole = sequelize.define(
+  const UserRole = sequelize.define(
     "user_role",
     {
-      role_name: {
+      roleName: {
         type: DataTypes.STRING,
       },
 
@@ -12,12 +12,12 @@ const userRoleModel = ({ sequelize, DataTypes }) => {
       },
     },
     {
-      tableName: "user",
+      tableName: "user_role",
       freezeTableName: true,
     }
   );
 
-  return sequelizeUserRole;
+  return UserRole;
 };
 
 module.exports = userRoleModel;
