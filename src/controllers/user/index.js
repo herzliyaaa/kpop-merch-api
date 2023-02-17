@@ -3,7 +3,8 @@ const {
   editUserUseCase,
   viewUserUseCase,
   viewAllUserUseCase,
-  softDeleteUserUseCase
+  softDeleteUserUseCase,
+  loginUserUseCase
 } = require("../../use-cases/user/index");
 
 const addUserController = require("./add-user.controller");
@@ -11,7 +12,7 @@ const editUserController = require("./edit-user.controller");
 const fetchAllUsersController = require("./get-all-users.controller");
 const fetchUserDetailsController = require("./get-user-details.controller");
 const deleteUserController = require("./soft-delete-user.controller");
-
+const loginUserAuthController = require("./login-user.controller");
 const postUserController = addUserController({
   addUserUseCase
 });
@@ -29,10 +30,15 @@ const softDeleteUserController = deleteUserController({
   softDeleteUserUseCase
 });
 
+const loginUserController = loginUserAuthController({
+  loginUserUseCase
+});
+
 module.exports = Object.freeze({
   postUserController,
   putUserController,
   getAllUserController,
   getUserByIdController,
-  softDeleteUserController
+  softDeleteUserController,
+  loginUserController
 });

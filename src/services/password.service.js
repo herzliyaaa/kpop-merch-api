@@ -14,4 +14,4 @@ const encryptPassword = ({ bcrypt }) => {
   return encrypt;
 };
 
-module.exports = { comparePassword, encryptPassword };
+module.exports = { encryptPassword, comparePassword };

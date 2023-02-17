@@ -1,11 +1,37 @@
-const userData = ({ model }) => {
+const userData = ({ model, encryptPass }) => {
   return Object.freeze({
+    findByUsername,
+    findByEmail,
     getAllUsers,
     getUserById,
     addUser,
     editUser,
     softDeleteUser,
   });
+
+  async function findByUsername( username ) {
+    try {
+      const User = model.userDataModel;
+      const response = await User.findAll({
+        where: { username: username },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function findByEmail({ email }) {
+    try {
+      const User = model.userDataModel;
+      const response = await User.findAll({
+        where: { email: email },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getAllUsers() {
     try {
@@ -32,14 +58,18 @@ const userData = ({ model }) => {
 
   async function addUser(user) {
     try {
-      const { name, username, password, user_role_id } = user;
+      const { name, username, password, userRoleId } = user;
       const User = model.userDataModel;
-      const response = await User.create({
+
+      let hashedPassword = await encryptPass(password);
+
+      let response = await User.create({
         name: name,
         username: username,
-        password: password,
-        user_role_id: user_role_id
+        password: hashedPassword,
+        userRoleId: userRoleId,
       });
+
       return response;
     } catch (error) {
       console.log(error);
@@ -56,7 +86,7 @@ const userData = ({ model }) => {
           where: { id: id },
         }
       );
-      console.log(response);
+
       return response;
     } catch (error) {
       console.log(error);
@@ -72,7 +102,7 @@ const userData = ({ model }) => {
           where: { id: id },
         }
       );
-      console.log(response);
+
       return response;
     } catch (error) {
       console.log(error);

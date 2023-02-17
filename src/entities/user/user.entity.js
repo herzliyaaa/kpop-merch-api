@@ -1,4 +1,4 @@
-const userEntity = (user) => {
+const userRegistrationEntity = (user) => {
   const { name, username, password, userRoleId } = user;
 
   if (!name) {
@@ -18,8 +18,26 @@ const userEntity = (user) => {
     name,
     username,
     password,
-    userRoleId,
+    userRoleId
   });
 };
 
-module.exports = userEntity;
+const userLoginEntity = (user) => {
+  const { email, username, password } = user;
+
+  if (!username) {
+    throw new Error("Email/Username is required.");
+  }
+
+  if (!password) {
+    throw new Error("Password is required.");
+  }
+
+  return Object.freeze({
+    email,
+    username,
+    password
+  });
+};
+
+module.exports = { userRegistrationEntity, userLoginEntity };

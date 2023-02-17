@@ -1,3 +1,3 @@
-const userEntity = require("./user.entity");
+const { userRegistrationEntity, userLoginEntity } = require("./user.entity");
 
-module.exports = userEntity;
+module.exports = { userRegistrationEntity, userLoginEntity };

@@ -5,13 +5,13 @@ const editUser = ({ userDB, userEntity }) => {
     const data = await userDB.editUser({
       id: id,
       name: result.name,
-      description: result.description,
+      description: result.description
     });
 
-    console.log(data)
+    console.log(data);
     return {
       msg: "User Updated Successfully",
-      data: data,
+      data: data
     };
   };
 };

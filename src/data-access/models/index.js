@@ -12,7 +12,7 @@ const userRoleDataModel = userRoleModel({ DataTypes, sequelize });
 userDataModel.belongsTo(userRoleDataModel);
 
 sequelize
-  .sync({ force: true })
+  .sync({ })
   .then(() => {
     console.log("Table created successfully!");
   })

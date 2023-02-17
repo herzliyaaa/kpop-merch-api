@@ -1,6 +1,6 @@
-const addUser = ({ userDB, userEntity }) => {
+const addUser = ({ userDB, userRegistrationEntity }) => {
   return async function postUser(info) {
-    const result = userEntity(info);
+    const result = userRegistrationEntity(info);
 
     const data = await userDB.addUser({
       name: result.name,
@@ -11,7 +11,7 @@ const addUser = ({ userDB, userEntity }) => {
 
     return {
       msg: "User Added Successfully",
-      data: data,
+      data: data
     };
   };
 };
