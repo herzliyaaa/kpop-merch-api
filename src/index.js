@@ -19,7 +19,7 @@ app.use(logger("dev"));
 // app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/api", (req, res) => {
-  res.send("Car Dealership API");
+  res.send("KEPAP API");
 });
 
 app.use("/api", require("./routes/product.route"));

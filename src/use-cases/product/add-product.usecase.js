@@ -10,7 +10,7 @@ const addProduct = ({ productDB, productEntity }) => {
 
     return {
       msg: "Product Added Successfully",
-      data: data
+      product: data
     };
 
   };

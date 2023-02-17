@@ -4,18 +4,19 @@ const productModel = ({ sequelize, DataTypes }) => {
     {
       name: {
         type: DataTypes.STRING,
+        allowNull: false
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
+        defaultValue: true
+      }
     },
     {
       tableName: "product",
-      freezeTableName: true,
+      freezeTableName: true
     }
   );
 

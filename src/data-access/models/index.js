@@ -9,10 +9,13 @@ const productDataModel = productModel({ DataTypes, sequelize });
 const userDataModel = userModel({ DataTypes, sequelize });
 const userRoleDataModel = userRoleModel({ DataTypes, sequelize });
 
-userDataModel.belongsTo(userRoleDataModel);
+userRoleDataModel.hasMany(userDataModel);
+userDataModel.belongsTo(userRoleDataModel, {
+  foreignKey: "userRoleId"
+});
 
 sequelize
-  .sync({ })
+  .sync({})
   .then(() => {
     console.log("Table created successfully!");
   })

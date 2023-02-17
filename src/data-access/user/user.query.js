@@ -6,14 +6,14 @@ const userData = ({ model, encryptPass }) => {
     getUserById,
     addUser,
     editUser,
-    softDeleteUser,
+    softDeleteUser
   });
 
-  async function findByUsername( username ) {
+  async function findByUsername(username) {
     try {
       const User = model.userDataModel;
       const response = await User.findAll({
-        where: { username: username },
+        where: { username: username }
       });
       return response;
     } catch (error) {
@@ -21,11 +21,11 @@ const userData = ({ model, encryptPass }) => {
     }
   }
 
-  async function findByEmail({ email }) {
+  async function findByEmail(email) {
     try {
       const User = model.userDataModel;
       const response = await User.findAll({
-        where: { email: email },
+        where: { email: email }
       });
       return response;
     } catch (error) {
@@ -36,9 +36,17 @@ const userData = ({ model, encryptPass }) => {
   async function getAllUsers() {
     try {
       const User = model.userDataModel;
+      const UserRole = model.userRoleDataModel;
       const response = await User.findAll({
+        include: [
+          {
+            model: UserRole,
+            required: true,
+            attributes: ["roleName"]
+          }
+        ],
         where: { isActive: true },
-        order: [["name", "DESC"]],
+        order: [["name", "DESC"]]
       });
       return response;
     } catch (error) {
@@ -61,13 +69,13 @@ const userData = ({ model, encryptPass }) => {
       const { name, username, password, userRoleId } = user;
       const User = model.userDataModel;
 
-      let hashedPassword = await encryptPass(password);
+      const hashedPassword = await encryptPass(password);
 
-      let response = await User.create({
+      const response = await User.create({
         name: name,
         username: username,
         password: hashedPassword,
-        userRoleId: userRoleId,
+        userRoleId: userRoleId
       });
 
       return response;
@@ -83,7 +91,7 @@ const userData = ({ model, encryptPass }) => {
       const response = await User.update(
         { name: name, description: description },
         {
-          where: { id: id },
+          where: { id: id }
         }
       );
 
@@ -99,7 +107,7 @@ const userData = ({ model, encryptPass }) => {
       const response = await User.update(
         { isActive: false },
         {
-          where: { id: id },
+          where: { id: id }
         }
       );
 

@@ -10,6 +10,8 @@ const makeExpressCallback = (controller) => {
       protocol: req.protocol,
       host: req.get("host"),
       file: req.file, 
+      token: req.token,
+      Authorization: req.get("Authorization"),
       headers: {
         "Content-Type": req.get("Content-Type"),
         Referer: req.get("referer"),

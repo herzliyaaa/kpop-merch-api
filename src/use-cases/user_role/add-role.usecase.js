@@ -7,7 +7,7 @@ const addUserRole = ({ userRoleDB, userRoleEntity }) => {
     });
 
     return {
-      msg: "Product Added Successfully",
+      msg: "Role Added Successfully",
       data: data,
     };
   };

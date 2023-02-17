@@ -4,30 +4,30 @@ const userModel = ({ sequelize, DataTypes, models }) => {
     {
       name: {
         type: DataTypes.STRING,
+        allowNull: false
       },
       username: {
         type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
+        defaultValue: true
+      }
     },
     {
       tableName: "user",
-      freezeTableName: true,
+      freezeTableName: true
     }
   );
-
- 
-  
-
 
   return User;
 };

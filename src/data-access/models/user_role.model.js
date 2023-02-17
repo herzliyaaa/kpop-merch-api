@@ -1,19 +1,20 @@
 const userRoleModel = ({ sequelize, DataTypes }) => {
   const UserRole = sequelize.define(
-    "user_role",
+    "userRole",
     {
       roleName: {
         type: DataTypes.STRING,
+        allowNull: false
       },
 
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
+        defaultValue: true
+      }
     },
     {
       tableName: "user_role",
-      freezeTableName: true,
+      freezeTableName: true
     }
   );
 

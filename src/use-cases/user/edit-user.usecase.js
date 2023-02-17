@@ -1,17 +1,18 @@
-const editUser = ({ userDB, userEntity }) => {
+const editUser = ({ userDB, userRegistrationEntity }) => {
   return async function putUser({ id, ...userInfo }) {
-    const result = userEntity(userInfo);
+    const result = userRegistrationEntity(userInfo);
 
     const data = await userDB.editUser({
       id: id,
       name: result.name,
-      description: result.description
+      username: result.username,
+      password: result.password,
+      userRoleId: result.userRoleId
     });
 
-    console.log(data);
     return {
       msg: "User Updated Successfully",
-      data: data
+      user: data
     };
   };
 };

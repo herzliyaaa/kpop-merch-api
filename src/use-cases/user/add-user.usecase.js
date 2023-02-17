@@ -11,7 +11,7 @@ const addUser = ({ userDB, userRegistrationEntity }) => {
 
     return {
       msg: "User Added Successfully",
-      data: data
+      user: data
     };
   };
 };

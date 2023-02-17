@@ -11,7 +11,7 @@ const editProduct = ({ productDB, productEntity }) => {
     console.log(data)
     return {
       msg: "Product Updated Successfully",
-      data: data,
+      product: data,
     };
   };
 };

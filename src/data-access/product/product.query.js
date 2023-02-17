@@ -4,7 +4,7 @@ const productData = ({ model }) => {
     getProductById,
     addProduct,
     editProduct,
-    softDeleteProduct,
+    softDeleteProduct
   });
 
   async function getAllProducts() {
@@ -12,7 +12,7 @@ const productData = ({ model }) => {
       const Product = model.productDataModel;
       const response = await Product.findAll({
         where: { isActive: true },
-        order: [["createdAt", "DESC"]],
+        order: [["createdAt", "DESC"]]
       });
       return response;
     } catch (error) {
@@ -36,7 +36,7 @@ const productData = ({ model }) => {
       const Product = model.productDataModel;
       const response = await Product.create({
         name: name,
-        description: description,
+        description: description
       });
       return response;
     } catch (error) {
@@ -51,7 +51,7 @@ const productData = ({ model }) => {
       const response = await Product.update(
         { name: name, description: description },
         {
-          where: { id: id },
+          where: { id: id }
         }
       );
       console.log(response);
@@ -67,7 +67,7 @@ const productData = ({ model }) => {
       const response = await Product.update(
         { isActive: false },
         {
-          where: { id: id },
+          where: { id: id }
         }
       );
       console.log(response);
