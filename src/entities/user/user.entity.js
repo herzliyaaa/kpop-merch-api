@@ -1,5 +1,5 @@
 const userRegistrationEntity = (user) => {
-  const { name, username, password, userRoleId } = user;
+  const { name, username, email, password, userRoleId } = user;
 
   if (!name) {
     throw new Error("Name is required.");
@@ -17,6 +17,7 @@ const userRegistrationEntity = (user) => {
   return Object.freeze({
     name,
     username,
+    email,
     password,
     userRoleId
   });
@@ -26,7 +27,7 @@ const userLoginEntity = (user) => {
   const { email, username, password } = user;
 
   if (!username) {
-    throw new Error("Email/Username is required.");
+    throw new Error("Username is required.");
   }
 
   if (!password) {

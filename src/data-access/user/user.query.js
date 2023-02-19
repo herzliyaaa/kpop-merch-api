@@ -1,7 +1,7 @@
-const userData = ({ model, encryptPass }) => {
+const userData = ({ model, Op, encryptPass }) => {
   return Object.freeze({
     findByUsername,
-    findByEmail,
+    findUser,
     getAllUsers,
     getUserById,
     addUser,
@@ -21,11 +21,21 @@ const userData = ({ model, encryptPass }) => {
     }
   }
 
-  async function findByEmail(email) {
+  async function findUser(user) {
     try {
+      const { username, email } = user;
       const User = model.userDataModel;
       const response = await User.findAll({
-        where: { email: email }
+        where: {
+         [Op.or]: [
+            {
+              email: email
+            },
+            {
+              username: username
+            }
+          ]
+        }
       });
       return response;
     } catch (error) {
@@ -66,7 +76,7 @@ const userData = ({ model, encryptPass }) => {
 
   async function addUser(user) {
     try {
-      const { name, username, password, userRoleId } = user;
+      const { name, username, password, email, userRoleId } = user;
       const User = model.userDataModel;
 
       const hashedPassword = await encryptPass(password);
@@ -74,6 +84,7 @@ const userData = ({ model, encryptPass }) => {
       const response = await User.create({
         name: name,
         username: username,
+        email: email,
         password: hashedPassword,
         userRoleId: userRoleId
       });

@@ -5,6 +5,7 @@ const addUser = ({ userDB, userRegistrationEntity }) => {
     const data = await userDB.addUser({
       name: result.name,
       username: result.username,
+      email: result.email,
       password: result.password,
       userRoleId: result.userRoleId
     });

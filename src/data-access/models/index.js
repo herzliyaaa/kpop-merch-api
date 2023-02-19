@@ -14,13 +14,13 @@ userDataModel.belongsTo(userRoleDataModel, {
   foreignKey: "userRoleId"
 });
 
-sequelize
-  .sync({})
-  .then(() => {
-    console.log("Table created successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to create table : ", error);
-  });
+// sequelize
+//   .sync({})
+//   .then(() => {
+//     console.log("Table created successfully!");
+//   })
+//   .catch((error) => {
+//     console.error("Unable to create table : ", error);
+//   });
 
 module.exports = { productDataModel, userDataModel, userRoleDataModel };
