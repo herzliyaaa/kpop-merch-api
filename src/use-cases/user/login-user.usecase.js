@@ -4,6 +4,10 @@ const loginUser = ({ userDB, userLoginEntity, generateToken, comparePass }) => {
     const userExists = await userDB.findByUsername(result.username);
     let token = "";
 
+    if (userExists === undefined || userExists.length == 0) {
+      throw new Error("User does not exist!");
+    }
+
     if (userExists[0].dataValues.isActive === false) {
       throw new Error("User is already inactive!");
     }
