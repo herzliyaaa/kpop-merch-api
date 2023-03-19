@@ -1,0 +1,23 @@
+version: '3'
+services:
+  api:
+    image: kpop-merch
+    restart: unless-stopped
+    container_name: kpop-merch-api
+    ports:
+      - 5032:5032
+
+  db:
+    image: 'postgres'
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'kepap'
+    container_name: postgresql-db
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
