@@ -18,6 +18,9 @@ const userModel = ({ sequelize, DataTypes, models }) => {
         type: DataTypes.STRING,
         allowNull: false
       },
+      resetToken: {
+        type: DataTypes.STRING,
+      },
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true

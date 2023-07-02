@@ -17,5 +17,5 @@ router.get("/user-details/:id", makeExpressCallback(getUserByIdController));
 router.get("/users", makeExpressCallback(getAllUserController));
 router.patch("/user/update/:id", makeExpressCallback(putUserController))
 router.patch("/user/delete/:id", makeExpressCallback(softDeleteUserController))
-
+router.post("/user/reset-password", makeExpressCallback())
 module.exports = router;

@@ -1,4 +1,4 @@
-const userData = ({ model, Op, encryptPass }) => {
+const userData = ({ model, Op, encryptPass, nodemailer, bcrypt }) => {
   return Object.freeze({
     findByUsername,
     findUser,
@@ -6,7 +6,10 @@ const userData = ({ model, Op, encryptPass }) => {
     getUserById,
     addUser,
     editUser,
-    softDeleteUser
+    softDeleteUser,
+    generateResetToken,
+    updatePassword,
+    sendEmail
   });
 
   async function findByUsername(username) {
@@ -20,6 +23,67 @@ const userData = ({ model, Op, encryptPass }) => {
       console.log(error);
     }
   }
+  async function generateResetToken(email) {
+    try {
+      // Generate a random reset token
+      const resetToken = bcrypt.hashSync(email, 10);
+
+      // Update the user's reset token in the database
+      await User.update(
+        {
+          resetToken
+        },
+        {
+          where: {
+            email
+          }
+        }
+      );
+
+      // Return the reset token
+      return resetToken;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function sendEmail(email, resetToken) {
+    try {
+      // Send an email to the user with the reset token
+      const mailOptions = {
+        from: "no-reply@example.com",
+        to: email,
+        subject: "Password Reset",
+        text: `
+        Click on the link below to reset your password:
+
+        http://localhost:5032/user/reset-password/${resetToken}
+      `
+      };
+
+      await nodemailer.sendMail(mailOptions);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function updatePassword(resetToken, password) {
+    try {
+      // Update the user's password in the database
+      await User.update(
+        {
+          password
+        },
+        {
+          where: {
+            resetToken
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function findUser(user) {
     try {
@@ -27,7 +91,7 @@ const userData = ({ model, Op, encryptPass }) => {
       const User = model.userDataModel;
       const response = await User.findAll({
         where: {
-         [Op.or]: [
+          [Op.or]: [
             {
               email: email
             },
