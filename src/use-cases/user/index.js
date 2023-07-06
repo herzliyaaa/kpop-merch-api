@@ -11,6 +11,7 @@ const viewUser = require("./view-user.usecase");
 const viewAllUser = require("./view-all-user.usecase");
 const softDelUser = require("./delete-user.usecase");
 const loginUser = require("./login-user.usecase");
+const resetPassword = require("./reset-password.usecase");
 
 const addUserUseCase = addUser({
   userDB,
@@ -29,11 +30,13 @@ const loginUserUseCase = loginUser({
   comparePass,
   generateToken
 });
+const resetPasswordUseCase = resetPassword({ userDB });
 module.exports = {
   addUserUseCase,
   editUserUseCase,
   viewUserUseCase,
   viewAllUserUseCase,
   softDeleteUserUseCase,
-  loginUserUseCase
+  loginUserUseCase,
+  resetPasswordUseCase
 };

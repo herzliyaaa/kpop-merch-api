@@ -27,6 +27,10 @@ const userData = ({ model, Op, encryptPass, nodemailer, bcrypt }) => {
     try {
       // Generate a random reset token
       const resetToken = bcrypt.hashSync(email, 10);
+      console.log(
+        "🚀 ~ file: user.query.js:30 ~ generateResetToken ~ resetToken:",
+        resetToken
+      );
 
       // Update the user's reset token in the database
       await User.update(
@@ -47,21 +51,33 @@ const userData = ({ model, Op, encryptPass, nodemailer, bcrypt }) => {
     }
   }
 
-  async function sendEmail(email, resetToken) {
+  async function sendEmail(user) {
     try {
+      const { email, resetToken } = user;
+      // Send an email to the user with the reset token.
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.MAIL_PASSWORD
+        }
+      });
+
       // Send an email to the user with the reset token
       const mailOptions = {
-        from: "no-reply@example.com",
+        from: process.env.SENDER_EMAIL,
         to: email,
         subject: "Password Reset",
         text: `
         Click on the link below to reset your password:
 
-        http://localhost:5032/user/reset-password/${resetToken}
+        http://localhost:5032/user/reset-password?${resetToken}
       `
       };
 
-      await nodemailer.sendMail(mailOptions);
+      await transporter.sendMail(mailOptions);
     } catch (error) {
       console.log(error);
     }

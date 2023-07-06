@@ -7,6 +7,8 @@ const generateJWT = ({ jwt }) => {
     }
     return signToken;
   };
+
+  
   
   module.exports = generateJWT;
   
